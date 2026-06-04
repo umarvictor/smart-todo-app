@@ -11,12 +11,15 @@ body{
 .container{
     background:#1e293b;
     padding:20px;
-    width:350px;
+    width:90%;
+    max-width:400px;
+    margin: auto;
     border-radius:10px;
 }
 
-input{
+input, select, button{
     width:100%;
+    box-sizing: border-box;
     padding:10px;
     margin:5px 0;
 }
@@ -35,13 +38,14 @@ ul{
 
 li{
     display:flex;
+    flex-wrap: wrap;
     justify-content:space-between;
     align-items:center;
     background:#334155;
     margin:5px 0;
     padding:10px;
     border-radius:5px;
-    gap:10px;
+    gap:8px;
 }
 
 .task-info{
