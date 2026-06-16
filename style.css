@@ -1,44 +1,63 @@
+/* GLOBAL RESET */
+*{
+    box-sizing: border-box;
+}
+
+/* PAGE LAYOUT */
 body{
-    font-family: Arial;
+    font-family: Arial, sans-serif;
     background:#0f172a;
+    color:white;
+    margin:0;
+
     display:flex;
     justify-content:center;
     align-items:center;
-    height:100vh;
-    color:white;
+    min-height:100vh;
+    padding:20px;
 }
 
+/* MAIN CONTAINER */
 .container{
     background:#1e293b;
     padding:20px;
-    width:90%;
+    width:100%;
     max-width:400px;
-    margin: auto;
     border-radius:10px;
 }
 
+/* INPUTS */
 input, select, button{
     width:100%;
-    box-sizing: border-box;
     padding:10px;
     margin:5px 0;
+    border: none;
+    border-radius:5px;
 }
 
+/* BUTTON DEFAULT */
 button{
-    width:100%;
-    padding:10px;
-    margin-top:5px;
     cursor:pointer;
+    background:#3b82f6;
+    color:white;
+    border:none;
+    transition:0.2s ease;
 }
 
+button:hover{
+    opacity:0.9;
+}
+
+/* LIST (for dashboard tasks) */
 ul{
     list-style:none;
     padding:0;
+    margin:0;
 }
 
 li{
     display:flex;
-    flex-wrap: wrap;
+    flex-wrap:wrap;
     justify-content:space-between;
     align-items:center;
     background:#334155;
@@ -48,17 +67,32 @@ li{
     gap:8px;
 }
 
+/* TASK TEXT WRAPPER */
 .task-info{
     flex:1;
     display:flex;
     flex-direction:column;
 }
 
+/* SMALL TEXT */
 small{
     opacity:0.7;
 }
 
-button{
+/* SMALL ACTION BUTTONS (dashboard use) */
+.task-actions button{
     width:auto;
     padding:6px 10px;
+    font-size:12px;
+}
+
+/* MOBILE SAFETY */
+@media (max-width: 480px){
+    body{
+        align-items:flex-start;
+    }
+
+    .container{
+        margin-top:20px;
+    }
 }
