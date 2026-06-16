@@ -51,7 +51,7 @@ function login(){
 
 
 // =========================
-// DASHBOARD PROTECTION
+// DASHBOARD INIT (SAFE)
 // =========================
 if(window.location.pathname.includes("dashboard.html")){
 
@@ -62,24 +62,28 @@ if(window.location.pathname.includes("dashboard.html")){
     }
 
     const user = JSON.parse(localStorage.getItem("user"));
-    document.getElementById("welcome").textContent =
-        "Welcome " + user.name;
+
+    if(user && document.getElementById("welcome")){
+        document.getElementById("welcome").textContent =
+            "Welcome " + user.name;
+    }
 
     loadTasks();
 }
 
 
 // =========================
-// TODO SYSTEM (PER USER)
+// TODO SYSTEM KEY
 // =========================
-
 function getTaskKey(){
     const user = localStorage.getItem("currentUser");
     return user + "_tasks";
 }
 
 
+// =========================
 // LOAD TASKS
+// =========================
 function loadTasks(){
 
     const taskList = document.getElementById("taskList");
@@ -95,7 +99,7 @@ function loadTasks(){
 
         const li = document.createElement("li");
 
-        // LEFT SIDE INFO
+        // TASK INFO
         const info = document.createElement("div");
         info.className = "task-info";
 
@@ -124,9 +128,16 @@ function loadTasks(){
             loadTasks();
         };
 
+        // BUTTON GROUP (FIX FOR MOBILE LAYOUT)
+        const btnGroup = document.createElement("div");
+        btnGroup.style.display = "flex";
+        btnGroup.style.gap = "5px";
+
+        btnGroup.appendChild(doneBtn);
+        btnGroup.appendChild(deleteBtn);
+
         li.appendChild(info);
-        li.appendChild(doneBtn);
-        li.appendChild(deleteBtn);
+        li.appendChild(btnGroup);
 
         taskList.appendChild(li);
     });
@@ -147,12 +158,17 @@ function loadTasks(){
         remark = "🚨 Low productivity, try planning better.";
     }
 
-    document.getElementById("remarks").textContent =
-        `Completion: ${percent}% - ${remark}`;
+    const remarksEl = document.getElementById("remarks");
+    if(remarksEl){
+        remarksEl.textContent =
+            `Completion: ${percent}% - ${remark}`;
+    }
 }
 
 
+// =========================
 // ADD TASK
+// =========================
 function addTask(){
 
     const text = document.getElementById("taskInput").value;
@@ -166,17 +182,18 @@ function addTask(){
 
     const tasks = JSON.parse(localStorage.getItem(getTaskKey())) || [];
 
+    // CASE-INSENSITIVE DUPLICATE CHECK
+    if(tasks.some(t => t.text.toLowerCase() === text.toLowerCase())){
+        alert("Task already exists");
+        return;
+    }
+
     const newTask = {
         text,
         time,
         priority,
         done: false
     };
-
-    if(tasks.some(t => t.text === text)){
-        alert("Task already exists");
-        return;
-    }
 
     tasks.push(newTask);
 
@@ -187,6 +204,7 @@ function addTask(){
 
     loadTasks();
 }
+
 
 // =========================
 // LOGOUT

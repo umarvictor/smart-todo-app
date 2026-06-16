@@ -1,39 +1,47 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Dashboard</title>
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+
+    <!-- FIX FOR MOBILE ZOOM ISSUE -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard</title>
+
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
 <div class="container">
 
-    <h2 id="welcome"></h2>
+    <h2 id="welcome">Welcome</h2>
 
     <button onclick="logout()">Logout</button>
 
     <hr>
 
-   <h3>My Tasks</h3>
+    <h3>My Tasks</h3>
 
-<input id="taskInput" placeholder="Enter a Task...">
+    <input id="taskInput" placeholder="Enter a Task...">
 
-<input id="taskTime" type="time">
+    <input id="taskTime" type="time">
 
-<select id="taskPriority">
-    <option value="Low">Low Priority</option>
-    <option value="Medium">Medium Priority</option>
-    <option value="High">High Priority</option>
-</select>
+    <select id="taskPriority">
+        <option value="Low">Low Priority</option>
+        <option value="Medium">Medium Priority</option>
+        <option value="High">High Priority</option>
+    </select>
 
-<button onclick="addTask()">Add Task</button>
+    <button onclick="addTask()">Add Task</button>
 
-<ul id="taskList"></ul>
+    <ul id="taskList"></ul>
 
-<h3 id="remarks"></h3>
+    <h3 id="remarks"></h3>
 
 </div>
 
 <script src="script.js"></script>
+
 </body>
 </html>
