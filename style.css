@@ -20,27 +20,67 @@ body{
 /* MAIN CONTAINER */
 .container{
     background:#1e293b;
-    padding:20px;
+    padding:24px;
     width:100%;
-    max-width:400px;
-    border-radius:10px;
+    max-width:450px;
+    border-radius:12px;
+}
+
+/* HEADINGS */
+h2{
+    text-align:center;
+    margin-bottom:20px;
+    font-size:28px;
+}
+
+h3{
+    margin-top:20px;
+    margin-bottom:10px;
+}
+
+/* LABELS */
+label{
+    display:block;
+    margin-top:12px;
+    margin-bottom:6px;
+    font-size:14px;
+    font-weight:600;
 }
 
 /* INPUTS */
-input, select, button{
+input,
+select{
     width:100%;
-    padding:10px;
-    margin:5px 0;
-    border: none;
-    border-radius:5px;
+    height:50px;
+    padding:12px;
+    margin-bottom:5px;
+    border:none;
+    border-radius:8px;
+    font-size:16px;
 }
 
-/* BUTTON DEFAULT */
+/* PLACEHOLDERS */
+input::placeholder{
+    color:#64748b;
+    font-size:15px;
+}
+
+/* BUTTONS */
 button{
-    cursor:pointer;
+    width:100%;
+    height:50px;
+    margin-top:10px;
+
+    border:none;
+    border-radius:8px;
+
     background:#3b82f6;
     color:white;
-    border:none;
+
+    font-size:16px;
+    font-weight:600;
+
+    cursor:pointer;
     transition:0.2s ease;
 }
 
@@ -48,7 +88,44 @@ button:hover{
     opacity:0.9;
 }
 
-/* LIST (for dashboard tasks) */
+/* DISABLED BUTTON */
+button:disabled{
+    background:#64748b;
+    cursor:not-allowed;
+    opacity:0.7;
+}
+
+/* ERROR MESSAGES */
+.error{
+    color:#ef4444;
+    font-size:13px;
+    display:block;
+    min-height:18px;
+    margin-bottom:5px;
+}
+
+/* CHECKBOX GROUP */
+.checkbox-group{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-top:15px;
+    margin-bottom:10px;
+}
+
+.checkbox-group input{
+    width:auto;
+    height:auto;
+    margin:0;
+}
+
+.checkbox-group label{
+    margin:0;
+    font-size:14px;
+    font-weight:normal;
+}
+
+/* DASHBOARD TASK LIST */
 ul{
     list-style:none;
     padding:0;
@@ -60,39 +137,81 @@ li{
     flex-wrap:wrap;
     justify-content:space-between;
     align-items:center;
+
     background:#334155;
-    margin:5px 0;
-    padding:10px;
-    border-radius:5px;
-    gap:8px;
+
+    margin:10px 0;
+    padding:12px;
+
+    border-radius:8px;
+    gap:10px;
 }
 
-/* TASK TEXT WRAPPER */
+/* TASK INFO */
 .task-info{
     flex:1;
     display:flex;
     flex-direction:column;
 }
 
-/* SMALL TEXT */
-small{
-    opacity:0.7;
+.task-info strong{
+    font-size:16px;
 }
 
-/* SMALL ACTION BUTTONS (dashboard use) */
+.task-info small{
+    font-size:13px;
+    opacity:0.8;
+}
+
+/* ACTION BUTTON GROUP */
+.task-actions{
+    display:flex;
+    gap:6px;
+}
+
 .task-actions button{
     width:auto;
-    padding:6px 10px;
-    font-size:12px;
+    height:auto;
+    padding:8px 12px;
+    font-size:13px;
+    margin:0;
+}
+
+/* LINKS */
+a{
+    color:#60a5fa;
+    text-decoration:none;
+}
+
+a:hover{
+    text-decoration:underline;
+}
+
+/* PARAGRAPHS */
+p{
+    text-align:center;
+    margin-top:15px;
 }
 
 /* MOBILE SAFETY */
-@media (max-width: 480px){
+@media (max-width:480px){
+
     body{
         align-items:flex-start;
     }
 
     .container{
         margin-top:20px;
+        padding:20px;
+    }
+
+    h2{
+        font-size:24px;
+    }
+
+    button,
+    input,
+    select{
+        font-size:16px;
     }
 }

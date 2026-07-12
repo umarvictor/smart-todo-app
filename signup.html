@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
 
-    <!-- IMPORTANT: fixes mobile scaling issues -->
+    <!-- Mobile responsiveness -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Sign Up</title>
@@ -15,15 +15,90 @@
 
 <div class="container">
 
-    <h2>Sign Up</h2>
+    <h2>Create Account</h2>
 
-    <input id="name" type="text" placeholder="Full Name">
-    <input id="email" type="email" placeholder="Email">
-    <input id="password" type="password" placeholder="Password">
+    <!-- FULL NAME -->
+    <div class="form-group">
+        <label for="name">Full Name</label>
 
-    <button onclick="signup()">Create Account</button>
+        <input
+            type="text"
+            id="name"
+            name="name"
+            placeholder="Enter your full name"
+            required>
 
-    <p>Already have an account? <a href="index.html">Login</a></p>
+        <small id="nameError" class="error"></small>
+    </div>
+
+    <!-- EMAIL -->
+    <div class="form-group">
+        <label for="email">Email Address</label>
+
+        <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Enter your email address"
+            required>
+
+        <small id="emailError" class="error"></small>
+    </div>
+
+    <!-- PASSWORD -->
+    <div class="form-group">
+        <label for="password">Password</label>
+
+        <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Enter your password"
+            required>
+
+        <small id="passwordError" class="error"></small>
+    </div>
+
+    <!-- CONFIRM PASSWORD -->
+    <div class="form-group">
+        <label for="confirmPassword">Confirm Password</label>
+
+        <input
+            type="password"
+            id="confirmPassword"
+            name="confirmPassword"
+            placeholder="Confirm your password"
+            required>
+
+        <small id="confirmPasswordError" class="error"></small>
+    </div>
+
+    <!-- TERMS -->
+    <div class="checkbox-group">
+        <input
+            type="checkbox"
+            id="terms"
+            required>
+
+        <label for="terms">
+            I agree to the Terms and Conditions
+        </label>
+    </div>
+
+    <small id="termsError" class="error"></small>
+
+    <!-- SIGNUP BUTTON -->
+    <button
+        id="signupBtn"
+        onclick="signup()"
+        disabled>
+        Create Account
+    </button>
+
+    <p>
+        Already have an account?
+        <a href="index.html">Login</a>
+    </p>
 
 </div>
 

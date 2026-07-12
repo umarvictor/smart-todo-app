@@ -165,6 +165,71 @@ function loadTasks(){
     }
 }
 
+//VALIDATION LOGIC
+function validateForm() {
+
+    const name = document.getElementById("name").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value;
+    const confirmPassword = document.getElementById("confirmPassword").value;
+    const terms = document.getElementById("terms").checked;
+
+    // Error elements
+    const emailError = document.getElementById("emailError");
+    const passwordError = document.getElementById("passwordError");
+    const confirmPasswordError = document.getElementById("confirmPasswordError");
+    const termsError = document.getElementById("termsError");
+
+    // Clear previous errors
+    emailError.textContent = "";
+    passwordError.textContent = "";
+    confirmPasswordError.textContent = "";
+    termsError.textContent = "";
+
+    let isValid = true;
+
+    // Email validation
+    if (email && !email.includes("@")) {
+        emailError.textContent = "Enter a valid email address";
+        isValid = false;
+    }
+
+    // Password validation
+    if (password && password.length < 8) {
+        passwordError.textContent =
+            "Password must be at least 8 characters";
+        isValid = false;
+    }
+
+    // Confirm password validation
+    if (confirmPassword && password !== confirmPassword) {
+        confirmPasswordError.textContent =
+            "Passwords do not match";
+        isValid = false;
+    }
+
+    // Terms validation
+    if (!terms) {
+        termsError.textContent =
+            "You must agree to the Terms and Conditions";
+        isValid = false;
+    }
+
+    // Enable button only when everything is filled
+    const allFieldsFilled =
+        name &&
+        email &&
+        password &&
+        confirmPassword &&
+        terms;
+
+    document.getElementById("signupBtn").disabled =
+        !(allFieldsFilled && isValid);
+}
+
+
+
+
 
 // =========================
 // ADD TASK
@@ -204,6 +269,35 @@ function addTask(){
 
     loadTasks();
 }
+//LISTENER
+document.addEventListener("DOMContentLoaded", () => {
+
+    if (document.getElementById("name")) {
+
+        document
+            .getElementById("name")
+            .addEventListener("input", validateForm);
+
+        document
+            .getElementById("email")
+            .addEventListener("input", validateForm);
+
+        document
+            .getElementById("password")
+            .addEventListener("input", validateForm);
+
+        document
+            .getElementById("confirmPassword")
+            .addEventListener("input", validateForm);
+
+        document
+            .getElementById("terms")
+            .addEventListener("change", validateForm);
+
+    }
+
+});
+
 
 
 // =========================
