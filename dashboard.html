@@ -1,47 +1,273 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
 
-    <!-- FIX FOR MOBILE ZOOM ISSUE -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
 
-    <title>Dashboard</title>
+    <title>Smart-To-Do Dashboard</title>
 
-    <link rel="stylesheet" href="style.css">
+    <link
+        rel="stylesheet"
+        href="css/style.css">
+
 </head>
 
 <body>
 
-<div class="container">
+<main class="container">
 
-    <h2 id="welcome">Welcome</h2>
+    <!-- ========================= -->
+    <!-- APP HEADER -->
+    <!-- ========================= -->
 
-    <button onclick="logout()">Logout</button>
+    <header class="app-header">
+
+        <div class="header-left">
+
+            <h2>Smart-To-Do</h2>
+
+            <p class="tagline">
+                Stay Focused. Stay Productive. Hit Targets.
+            </p>
+
+        </div>
+
+        <div class="header-center">
+
+            <div id="currentDate"></div>
+
+            <div id="currentTime"></div>
+
+        </div>
+
+        <div class="header-right">
+
+            <div
+                id="avatar"
+                class="avatar"
+                title="User Avatar">
+            </div>
+
+            <button
+                id="focusModeBtn"
+                aria-pressed="false">
+
+                Enter Focus Mode
+
+            </button>
+
+            <button
+                id="logoutBtn"
+                onclick="logout()">
+
+                Logout
+
+            </button>
+
+        </div>
+
+    </header>
 
     <hr>
 
-    <h3>My Tasks</h3>
+    <!-- ========================= -->
+    <!-- WELCOME -->
+    <!-- ========================= -->
 
-    <input id="taskInput" placeholder="Enter a Task...">
+    <h2 id="welcome"></h2>
 
-    <input id="taskTime" type="time">
+    <!-- ========================= -->
+    <!-- TASK CREATION -->
+    <!-- ========================= -->
 
-    <select id="taskPriority">
-        <option value="Low">Low Priority</option>
-        <option value="Medium">Medium Priority</option>
-        <option value="High">High Priority</option>
-    </select>
+    <section class="task-panel">
 
-    <button onclick="addTask()">Add Task</button>
+        <h3>Create New Task</h3>
 
-    <ul id="taskList"></ul>
+        <!-- Task Title -->
 
-    <h3 id="remarks"></h3>
+        <div class="form-group">
 
-</div>
+            <label for="taskInput">
 
-<script src="script.js"></script>
+                Task Title 
+
+            </label>
+
+            <input
+                id="taskInput"
+                type="text"
+                maxlength="200"
+                required
+                placeholder="What do you need to accomplish today?">
+
+            <small
+                id="taskTitleError"
+                class="error">
+            </small>
+
+            <small
+                id="taskCounter"
+                class="counter">
+
+                0/200
+
+            </small>
+
+        </div>
+
+        <!-- Due Date -->
+
+        <div class="form-group">
+
+            <label for="taskDate">
+
+                Due Date
+
+            </label>
+
+            <input
+                id="taskDate"
+                type="date">
+
+        </div>
+
+        <!-- Due Time -->
+
+        <div class="form-group">
+
+            <label for="taskTime">
+
+                Due Time
+
+            </label>
+
+            <input
+                id="taskTime"
+                type="time">
+
+        </div>
+
+        <!-- Priority -->
+
+        <div class="form-group">
+
+            <label for="taskPriority">
+
+                Priority
+
+            </label>
+
+            <select id="taskPriority">
+
+                <option value="Low">
+                    🟢 Low
+                </option>
+
+                <option value="Medium">
+                    🟡 Medium
+                </option>
+
+                <option value="High">
+                    🔴 High
+                </option>
+
+            </select>
+
+        </div>
+
+        <!-- Goal Tag -->
+
+        <div class="form-group">
+
+            <label for="goalTag">
+
+                Goal Tag (Optional)
+
+            </label>
+
+            <input
+                id="goalTag"
+                type="text"
+                autocomplete="off"
+                placeholder="Work, Personal, Study">
+
+        </div>
+
+        <!-- Add Task Button -->
+
+        <button
+            id="addTaskBtn"
+            onclick="addTask()">
+
+            + Add Task
+
+        </button>
+
+    </section>
+
+    <hr>
+
+    <!-- ========================= -->
+    <!-- TASK LIST -->
+    <!-- ========================= -->
+
+    <section>
+
+        <h3>My Tasks</h3>
+
+        <!-- Empty State -->
+
+        <div id="emptyState">
+
+            <h4>
+
+                Nothing planned yet
+
+            </h4>
+
+            <p>
+
+                Add your first task and start building momentum.
+
+            </p>
+
+        </div>
+
+        <!-- Task List -->
+
+        <ul
+            id="taskList"
+            aria-live="polite">
+
+        </ul>
+
+    </section>
+
+    <!-- Productivity -->
+
+    <section>
+
+        <h3 id="remarks"></h3>
+
+    </section>
+
+</main>
+
+<!-- ========================= -->
+<!-- JAVASCRIPT -->
+<!-- ========================= -->
+
+<script src="js/tasks.js"></script>
+<script src="js/dashboard.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/main.js"></script>
 
 </body>
+
 </html>

@@ -215,3 +215,41 @@ p{
         font-size:16px;
     }
 }
+
+/* COMPLETED TASKS */
+
+.completed{
+    opacity:0.7;
+    background:#1f2937;
+    border-left:4px solid #22c55e;
+}
+
+.completed .task-info strong{
+    text-decoration: line-through;
+}
+
+.focus-mode{
+    background:#020617;
+}
+
+.focus-mode .container{
+    box-shadow:
+    0 0 20px rgba(59,130,246,.5);
+}
+
+.app-header{
+
+    position:sticky;
+
+    top:0;
+
+    background:#1e293b;
+
+    padding:15px;
+
+    border-radius:10px;
+
+    margin-bottom:20px;
+
+    z-index:100;
+}
