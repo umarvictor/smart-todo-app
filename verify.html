@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Verify Email — FocusFlow</title>
+
+    <link
+        rel="stylesheet"
+        href="css/style.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h2>Verify Your Email</h2>
+
+    <p class="subtitle" id="verifySubtitle">
+        Enter the 6-digit code sent to your inbox.
+    </p>
+
+
+    <!-- ========================= -->
+    <!-- SIMULATED EMAIL PREVIEW   -->
+    <!-- ========================= -->
+
+    <div class="email-preview" id="emailPreview">
+
+        <p class="email-preview-label">
+            📬 Simulated Email Preview
+        </p>
+
+        <p class="email-preview-note">
+            In production, this code would be
+            sent to your inbox.
+        </p>
+
+        <p class="email-preview-code" id="previewCode">
+            ------
+        </p>
+
+    </div>
+
+
+    <!-- ========================= -->
+    <!-- 6-DIGIT CODE INPUTS       -->
+    <!-- ========================= -->
+
+    <fieldset class="verify-fieldset">
+
+        <legend class="sr-only">
+            Verification code
+        </legend>
+
+        <div class="verify-inputs" id="verifyInputs">
+
+            <input
+                class="verify-input"
+                type="text"
+                inputmode="numeric"
+                maxlength="1"
+                pattern="[0-9]"
+                aria-label="Digit 1 of 6"
+                data-index="0">
+
+            <input
+                class="verify-input"
+                type="text"
+                inputmode="numeric"
+                maxlength="1"
+                pattern="[0-9]"
+                aria-label="Digit 2 of 6"
+                data-index="1">
+
+            <input
+                class="verify-input"
+                type="text"
+                inputmode="numeric"
+                maxlength="1"
+                pattern="[0-9]"
+                aria-label="Digit 3 of 6"
+                data-index="2">
+
+            <input
+                class="verify-input"
+                type="text"
+                inputmode="numeric"
+                maxlength="1"
+                pattern="[0-9]"
+                aria-label="Digit 4 of 6"
+                data-index="3">
+
+            <input
+                class="verify-input"
+                type="text"
+                inputmode="numeric"
+                maxlength="1"
+                pattern="[0-9]"
+                aria-label="Digit 5 of 6"
+                data-index="4">
+
+            <input
+                class="verify-input"
+                type="text"
+                inputmode="numeric"
+                maxlength="1"
+                pattern="[0-9]"
+                aria-label="Digit 6 of 6"
+                data-index="5">
+
+        </div>
+
+    </fieldset>
+
+
+    <!-- ========================= -->
+    <!-- PASTE MODE TOGGLE         -->
+    <!-- ========================= -->
+
+    <p class="paste-toggle-row">
+        <a href="#" id="pasteToggle">
+            Paste full code instead
+        </a>
+    </p>
+
+    <div id="pasteModeWrap" style="display:none;">
+
+        <input
+            id="pasteInput"
+            type="text"
+            maxlength="6"
+            inputmode="numeric"
+            placeholder="Paste 6-digit code here">
+
+        <button
+            type="button"
+            onclick="submitPastedCode()">
+            Verify
+        </button>
+
+    </div>
+
+
+    <!-- ========================= -->
+    <!-- ERROR MESSAGE             -->
+    <!-- ========================= -->
+
+    <small
+        id="verifyError"
+        class="error">
+    </small>
+
+
+    <!-- ========================= -->
+    <!-- RESEND ROW                -->
+    <!-- ========================= -->
+
+    <div class="resend-row">
+
+        <span>Didn't receive it?</span>
+
+        <button
+            type="button"
+            id="resendBtn"
+            class="resend-btn"
+            onclick="resendCode()">
+            Resend Code
+        </button>
+
+        <span
+            id="resendTimer"
+            style="display:none;">
+        </span>
+
+    </div>
+
+
+    <!-- ========================= -->
+    <!-- BACK LINK                 -->
+    <!-- ========================= -->
+
+    <p>
+        <a href="signup.html">
+            ← Back to Sign Up
+        </a>
+    </p>
+
+</div>
+
+<script src="js/auth.js"></script>
+<script src="js/verify.js"></script>
+
+</body>
+
+</html>

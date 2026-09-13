@@ -9,27 +9,29 @@
         name="viewport"
         content="width=device-width, initial-scale=1.0">
 
-    <title>Smart-To-Do Dashboard</title>
+    <title>FocusFlow Dashboard</title>
 
     <link
         rel="stylesheet"
         href="css/style.css">
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
 </head>
 
-<body>
+<body class="dashboard-page">
 
 <main class="container">
 
     <!-- ========================= -->
-    <!-- APP HEADER -->
+    <!-- APP HEADER                -->
     <!-- ========================= -->
 
     <header class="app-header">
 
         <div class="header-left">
 
-            <h2>Smart-To-Do</h2>
+            <h2>FocusFlow</h2>
 
             <p class="tagline">
                 Stay Focused. Stay Productive. Hit Targets.
@@ -56,218 +58,492 @@
             <button
                 id="focusModeBtn"
                 aria-pressed="false">
-
                 Enter Focus Mode
-
             </button>
 
             <button
                 id="logoutBtn"
                 onclick="logout()">
-
                 Logout
-
             </button>
 
         </div>
 
     </header>
 
-    <hr>
 
     <!-- ========================= -->
-    <!-- WELCOME -->
+    <!-- WELCOME                   -->
     <!-- ========================= -->
 
     <h2 id="welcome"></h2>
 
-    <!-- ========================= -->
-    <!-- TASK CREATION -->
-    <!-- ========================= -->
-
-    <section class="task-panel">
-
-        <h3>Create New Task</h3>
-
-        <!-- Task Title -->
-
-        <div class="form-group">
-
-            <label for="taskInput">
-
-                Task Title 
-
-            </label>
-
-            <input
-                id="taskInput"
-                type="text"
-                maxlength="200"
-                required
-                placeholder="What do you need to accomplish today?">
-
-            <small
-                id="taskTitleError"
-                class="error">
-            </small>
-
-            <small
-                id="taskCounter"
-                class="counter">
-
-                0/200
-
-            </small>
-
-        </div>
-
-        <!-- Due Date -->
-
-        <div class="form-group">
-
-            <label for="taskDate">
-
-                Due Date
-
-            </label>
-
-            <input
-                id="taskDate"
-                type="date">
-
-        </div>
-
-        <!-- Due Time -->
-
-        <div class="form-group">
-
-            <label for="taskTime">
-
-                Due Time
-
-            </label>
-
-            <input
-                id="taskTime"
-                type="time">
-
-        </div>
-
-        <!-- Priority -->
-
-        <div class="form-group">
-
-            <label for="taskPriority">
-
-                Priority
-
-            </label>
-
-            <select id="taskPriority">
-
-                <option value="Low">
-                    🟢 Low
-                </option>
-
-                <option value="Medium">
-                    🟡 Medium
-                </option>
-
-                <option value="High">
-                    🔴 High
-                </option>
-
-            </select>
-
-        </div>
-
-        <!-- Goal Tag -->
-
-        <div class="form-group">
-
-            <label for="goalTag">
-
-                Goal Tag (Optional)
-
-            </label>
-
-            <input
-                id="goalTag"
-                type="text"
-                autocomplete="off"
-                placeholder="Work, Personal, Study">
-
-        </div>
-
-        <!-- Add Task Button -->
-
-        <button
-            id="addTaskBtn"
-            onclick="addTask()">
-
-            + Add Task
-
-        </button>
-
-    </section>
-
-    <hr>
 
     <!-- ========================= -->
-    <!-- TASK LIST -->
+    <!-- DASHBOARD GRID            -->
     <!-- ========================= -->
 
-    <section>
+    <div class="dashboard-grid">
 
-        <h3>My Tasks</h3>
 
-        <!-- Empty State -->
+        <!-- =================== -->
+        <!-- LEFT COLUMN         -->
+        <!-- =================== -->
 
-        <div id="emptyState">
+        <div class="dashboard-left">
 
-            <h4>
 
-                Nothing planned yet
+            <!-- ========================= -->
+            <!-- TASK CREATION PANEL       -->
+            <!-- ========================= -->
 
-            </h4>
+            <section class="task-panel">
 
-            <p>
+                <h3>Create New Task</h3>
 
-                Add your first task and start building momentum.
+                <!-- TASK TITLE -->
+                <div class="form-group">
 
+                    <label for="taskInput">
+                        Task Title *
+                    </label>
+
+                    <input
+                        id="taskInput"
+                        type="text"
+                        maxlength="200"
+                        placeholder="What do you need to accomplish today?">
+
+                    <small
+                        id="taskTitleError"
+                        class="error">
+                    </small>
+
+                    <small
+                        id="taskCounter"
+                        class="counter">
+                        0/200
+                    </small>
+
+                </div>
+
+                <!-- DUE DATE -->
+                <div class="form-group">
+
+                    <label for="taskDate">
+                        Due Date
+                    </label>
+
+                    <input
+                        id="taskDate"
+                        type="date">
+
+                </div>
+
+                <!-- DUE TIME -->
+                <div class="form-group">
+
+                    <label for="taskTime">
+                        Due Time
+                    </label>
+
+                    <input
+                        id="taskTime"
+                        type="time">
+
+                </div>
+
+                <!-- PRIORITY -->
+                <div class="form-group">
+
+                    <label for="taskPriority">
+                        Priority
+                    </label>
+
+                    <select id="taskPriority">
+
+                        <option value="Low">Low</option>
+
+                        <option value="Medium">Medium</option>
+
+                        <option value="High">High</option>
+
+                    </select>
+
+                </div>
+
+                <!-- GOAL TAG -->
+                <div class="form-group">
+
+                    <label for="goalTag">
+                        Goal Tag
+                    </label>
+
+                    <input
+                        id="goalTag"
+                        type="text"
+                        placeholder="Work, Personal, Study">
+
+                </div>
+
+                <!-- ADD TASK BUTTON -->
+                <button
+                    type="button"
+                    onclick="addTask()">
+                    + Add Task
+                </button>
+
+            </section>
+
+
+            <!-- ========================= -->
+            <!-- TASK LIST                 -->
+            <!-- ========================= -->
+
+            <section class="task-list-section">
+
+                <h3>My Tasks</h3>
+
+                <!-- FILTER TABS -->
+                <div class="filter-bar" role="tablist">
+
+                    <button
+                        class="filter-tab active"
+                        data-filter="all"
+                        role="tab"
+                        aria-selected="true"
+                        onclick="setFilter('all')">
+                        All
+                    </button>
+
+                    <button
+                        class="filter-tab"
+                        data-filter="today"
+                        role="tab"
+                        aria-selected="false"
+                        onclick="setFilter('today')">
+                        Today
+                    </button>
+
+                    <button
+                        class="filter-tab"
+                        data-filter="upcoming"
+                        role="tab"
+                        aria-selected="false"
+                        onclick="setFilter('upcoming')">
+                        Upcoming
+                    </button>
+
+                    <button
+                        class="filter-tab"
+                        data-filter="overdue"
+                        role="tab"
+                        aria-selected="false"
+                        onclick="setFilter('overdue')">
+                        Overdue
+                    </button>
+
+                    <button
+                        class="filter-tab"
+                        data-filter="completed"
+                        role="tab"
+                        aria-selected="false"
+                        onclick="setFilter('completed')">
+                        Completed
+                    </button>
+
+                </div>
+
+                <!-- SORT BAR -->
+                <div class="sort-bar">
+
+                    <span>Sort by:</span>
+
+                    <select onchange="setSort(this.value)">
+                        <option value="dateAdded">Date Added</option>
+                        <option value="dueDate">Due Date</option>
+                        <option value="priority">Priority</option>
+                        <option value="alpha">A–Z</option>
+                    </select>
+
+                </div>
+
+                <!-- TASK LIST -->
+                <ul
+                    id="taskList"
+                    aria-label="Task list"
+                    aria-live="polite">
+                </ul>
+
+                <!-- SCREEN READER ANNOUNCEMENTS -->
+                <span
+                    id="statsAnnounce"
+                    class="sr-announce"
+                    aria-live="polite">
+                </span>
+
+            </section>
+
+
+        </div>
+        <!-- END LEFT COLUMN -->
+
+
+        <!-- =================== -->
+        <!-- RIGHT COLUMN        -->
+        <!-- =================== -->
+
+        <div class="dashboard-right">
+
+
+            <!-- ========================= -->
+            <!-- PRODUCTIVITY STATS        -->
+            <!-- ========================= -->
+
+            <section class="stats-section">
+
+                <h3>Today's Progress</h3>
+
+                <!-- STAT CARDS -->
+                <div class="stats-grid">
+
+                    <div class="stat-card">
+                        <div class="stat-label">Total Tasks</div>
+                        <div class="stat-value" id="statTotal">0</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-label">Completed</div>
+                        <div class="stat-value" id="statCompleted">0</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-label">Productivity</div>
+                        <div class="stat-value" id="statPercent">—</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-label">🔥 Streak</div>
+                        <div class="stat-value" id="statStreak">0d</div>
+                    </div>
+
+                </div>
+
+                <!-- PROGRESS BAR -->
+                <div
+                    class="progress-wrap"
+                    role="progressbar"
+                    aria-valuemin="0"
+                    aria-valuemax="100"
+                    aria-valuenow="0"
+                    aria-label="Daily productivity progress">
+
+                    <div
+                        class="progress-fill danger"
+                        id="progressBar">
+                    </div>
+
+                </div>
+
+                <!-- MOTIVATION MESSAGE -->
+                <div
+                    class="motivation-msg"
+                    id="motivationMsg"
+                    aria-live="polite"
+                    aria-atomic="true">
+                </div>
+
+                <!-- AI INSIGHT -->
+                <div
+                    class="motivation-msg"
+                    id="insightText"
+                    aria-live="polite">
+                </div>
+
+            </section>
+
+
+            <!-- ========================= -->
+            <!-- POMODORO TIMER            -->
+            <!-- ========================= -->
+
+            <section
+                id="pomodoroPanel"
+                class="pomodoro-section">
+
+                <h3>⏱ Pomodoro Timer</h3>
+
+                <!-- SVG RING -->
+                <div class="timer-ring-wrap">
+
+                    <svg
+                        class="timer-svg"
+                        viewBox="0 0 120 120"
+                        width="160"
+                        height="160">
+
+                        <circle
+                            class="timer-ring-bg"
+                            cx="60"
+                            cy="60"
+                            r="54"
+                            fill="none"
+                            stroke="#0f172a"
+                            stroke-width="8"/>
+
+                        <circle
+                            id="timerRing"
+                            class="timer-ring-prog"
+                            cx="60"
+                            cy="60"
+                            r="54"
+                            fill="none"
+                            stroke="#3b82f6"
+                            stroke-width="8"
+                            stroke-linecap="round"
+                            transform="rotate(-90 60 60)"/>
+
+                    </svg>
+
+                    <div class="timer-center">
+
+                        <div
+                            class="timer-phase-label"
+                            id="timerPhaseLabel">
+                            Focus
+                        </div>
+
+                        <div
+                            class="timer-display"
+                            id="timerDisplay">
+                            25:00
+                        </div>
+
+                        <div
+                            class="timer-session-count"
+                            id="timerSessionCount">
+                            Session 1 of 4
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- LINKED TASK -->
+                <div
+                    class="timer-linked-task"
+                    id="timerLinkedTask">
+                </div>
+
+                <!-- CONTROLS -->
+                <div class="timer-controls">
+
+                    <button
+                        type="button"
+                        id="timerStartBtn"
+                        class="timer-btn timer-btn-primary"
+                        onclick="timerToggle()"
+                        aria-label="Start timer">
+                        ▶ Start
+                    </button>
+
+                    <button
+                        type="button"
+                        class="timer-btn"
+                        onclick="timerReset()"
+                        aria-label="Reset timer">
+                        ↺ Reset
+                    </button>
+
+                </div>
+
+                <!-- PHASE DOTS -->
+                <div class="phase-dots">
+                    <div class="phase-dot current" title="Session 1"></div>
+                    <div class="phase-dot" title="Session 2"></div>
+                    <div class="phase-dot" title="Session 3"></div>
+                    <div class="phase-dot" title="Session 4"></div>
+                </div>
+
+            </section>
+
+
+            <!-- ========================= -->
+            <!-- WEEKLY CHART              -->
+            <!-- ========================= -->
+
+            <section id="chartPanel">
+
+                <h3>📈 Weekly Analytics</h3>
+
+                <p
+                    class="chart-range"
+                    id="chartRange">
+                </p>
+
+                <div class="chart-wrap">
+                    <canvas id="weeklyChart"></canvas>
+                </div>
+
+            </section>
+
+
+        </div>
+        <!-- END RIGHT COLUMN -->
+
+
+    </div>
+    <!-- END DASHBOARD GRID -->
+
+
+    <!-- ========================= -->
+    <!-- TIMER COMPLETION MODAL    -->
+    <!-- ========================= -->
+
+    <div
+        id="timerModal"
+        class="modal-backdrop"
+        style="display:none;">
+
+        <div class="modal">
+
+            <h3
+                class="modal-title"
+                id="timerModalTitle">
+            </h3>
+
+            <p
+                class="modal-body"
+                id="timerModalBody">
             </p>
 
+            <button
+                type="button"
+                class="modal-close-btn"
+                onclick="closeTimerModal()">
+                OK
+            </button>
+
         </div>
 
-        <!-- Task List -->
+    </div>
 
-        <ul
-            id="taskList"
-            aria-live="polite">
-
-        </ul>
-
-    </section>
-
-    <!-- Productivity -->
-
-    <section>
-
-        <h3 id="remarks"></h3>
-
-    </section>
 
 </main>
 
+
 <!-- ========================= -->
-<!-- JAVASCRIPT -->
+<!-- JAVASCRIPT                -->
 <!-- ========================= -->
 
-<script src="js/tasks.js"></script>
-<script src="js/dashboard.js"></script>
 <script src="js/auth.js"></script>
+<script src="js/chart.js"></script>
+<script src="js/tasks.js"></script>
+<script src="js/timer.js"></script>
+<script src="js/dashboard.js"></script>
 <script src="js/main.js"></script>
 
 </body>
 
 </html>
+

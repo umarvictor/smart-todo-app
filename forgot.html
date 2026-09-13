@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Forgot Password — FocusFlow</title>
+
+    <link
+        rel="stylesheet"
+        href="css/style.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h2>Reset Password</h2>
+
+    <p class="subtitle">
+        Enter your email and we'll send you a reset link.
+    </p>
+
+
+    <!-- ========================= -->
+    <!-- STEP 1: REQUEST RESET     -->
+    <!-- ========================= -->
+
+    <div id="stepRequest">
+
+        <div class="form-group">
+
+            <label for="forgotEmail">
+                Email Address
+            </label>
+
+            <input
+                type="email"
+                id="forgotEmail"
+                placeholder="you@example.com"
+                autocomplete="email">
+
+            <small
+                id="forgotEmailError"
+                class="error">
+            </small>
+
+        </div>
+
+        <button
+            type="button"
+            onclick="requestReset()">
+            Send Reset Link
+        </button>
+
+        <!-- SIMULATED EMAIL PREVIEW -->
+        <div
+            class="email-preview"
+            id="resetPreview"
+            style="display:none;">
+
+            <p class="email-preview-label">
+                📬 Simulated Reset Email
+            </p>
+
+            <p class="email-preview-note">
+                In production, this link would
+                be sent to your inbox.
+            </p>
+
+            <p
+                class="email-preview-code"
+                style="font-size:14px;word-break:break-all;"
+                id="resetLinkDisplay">
+            </p>
+
+        </div>
+
+        <div
+            id="requestSuccessMsg"
+            class="success-msg"
+            style="display:none;">
+        </div>
+
+    </div>
+
+
+    <!-- ========================= -->
+    <!-- STEP 2: SET NEW PASSWORD  -->
+    <!-- ========================= -->
+
+    <div id="stepReset" style="display:none;">
+
+        <p class="subtitle">
+            Choose a new password for your account.
+        </p>
+
+        <div class="form-group">
+
+            <label for="resetPassword">
+                New Password
+            </label>
+
+            <input
+                type="password"
+                id="resetPassword"
+                placeholder="Min 8 chars, 1 uppercase, 1 number, 1 special"
+                autocomplete="new-password">
+
+            <small
+                id="resetPasswordError"
+                class="error">
+            </small>
+
+        </div>
+
+        <div class="form-group">
+
+            <label for="resetConfirm">
+                Confirm Password
+            </label>
+
+            <input
+                type="password"
+                id="resetConfirm"
+                placeholder="Repeat your password"
+                autocomplete="new-password">
+
+            <small
+                id="resetConfirmError"
+                class="error">
+            </small>
+
+        </div>
+
+        <button
+            type="button"
+            onclick="submitNewPassword()">
+            Update Password
+        </button>
+
+    </div>
+
+
+    <!-- ========================= -->
+    <!-- BACK LINK                 -->
+    <!-- ========================= -->
+
+    <p>
+        <a href="index.html">
+            ← Back to Sign In
+        </a>
+    </p>
+
+</div>
+
+<script src="js/auth.js"></script>
+<script src="js/forgot.js"></script>
+
+</body>
+
+</html>

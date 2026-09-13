@@ -1,14 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
 
-    <!-- Mobile responsiveness -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
 
-    <title>Sign Up</title>
+    <title>Sign Up — FocusFlow</title>
 
-    <link rel="stylesheet" href="css/style.css">
+    <link
+        rel="stylesheet"
+        href="css/style.css">
+
 </head>
 
 <body>
@@ -17,94 +23,162 @@
 
     <h2>Create Account</h2>
 
-    <!-- FULL NAME -->
+    <p class="subtitle">
+        Start building your focus habit today.
+    </p>
+
+
+    <!-- ========================= -->
+    <!-- FULL NAME                 -->
+    <!-- ========================= -->
+
     <div class="form-group">
-        <label for="name">Full Name</label>
+
+        <label for="name">
+            Full Name
+        </label>
 
         <input
             type="text"
             id="name"
-            name="name"
-            placeholder="Enter your full name"
-            required>
+            placeholder="Ada Lovelace"
+            autocomplete="name">
 
-        <small id="nameError" class="error"></small>
+        <small
+            id="nameError"
+            class="error">
+        </small>
+
     </div>
 
-    <!-- EMAIL -->
+
+    <!-- ========================= -->
+    <!-- EMAIL                     -->
+    <!-- ========================= -->
+
     <div class="form-group">
-        <label for="email">Email Address</label>
+
+        <label for="email">
+            Email Address
+        </label>
 
         <input
             type="email"
             id="email"
-            name="email"
-            placeholder="Enter your email address"
-            required>
+            placeholder="you@example.com"
+            autocomplete="email">
 
-        <small id="emailError" class="error"></small>
+        <small
+            id="emailError"
+            class="error">
+        </small>
+
     </div>
 
-    <!-- PASSWORD -->
+
+    <!-- ========================= -->
+    <!-- PASSWORD                  -->
+    <!-- ========================= -->
+
     <div class="form-group">
-        <label for="password">Password</label>
+
+        <label for="password">
+            Password
+        </label>
 
         <input
             type="password"
             id="password"
-            name="password"
-            placeholder="Enter your password"
-            required>
+            placeholder="Min 8 chars, 1 uppercase, 1 number, 1 special"
+            autocomplete="new-password">
 
-        <small id="passwordError" class="error"></small>
+        <small
+            id="passwordError"
+            class="error">
+        </small>
+
     </div>
 
-    <!-- CONFIRM PASSWORD -->
+
+    <!-- ========================= -->
+    <!-- CONFIRM PASSWORD          -->
+    <!-- ========================= -->
+
     <div class="form-group">
-        <label for="confirmPassword">Confirm Password</label>
+
+        <label for="confirmPassword">
+            Confirm Password
+        </label>
 
         <input
             type="password"
             id="confirmPassword"
-            name="confirmPassword"
-            placeholder="Confirm your password"
-            required>
+            placeholder="Repeat your password"
+            autocomplete="new-password">
 
-        <small id="confirmPasswordError" class="error"></small>
+        <small
+            id="confirmPasswordError"
+            class="error">
+        </small>
+
     </div>
 
-    <!-- TERMS -->
+
+    <!-- ========================= -->
+    <!-- TERMS CHECKBOX            -->
+    <!-- ========================= -->
+
     <div class="checkbox-group">
-        <input
-            type="checkbox"
-            id="terms"
-            required>
 
-        <label for="terms">
-            I agree to the Terms and Conditions
-        </label>
-    </div>
+    <input
+        type="checkbox"
+        id="terms"
+        required>
 
-    <small id="termsError" class="error"></small>
+    <label for="terms">
+        I agree to the Terms and Conditions
+    </label>
 
-    <!-- SIGNUP BUTTON -->
+</div>
+
+    <small
+        id="termsError"
+        class="error">
+    </small>
+
+
+    <!-- ========================= -->
+    <!-- SIGNUP BUTTON             -->
+    <!-- ========================= -->
+
     <button
+        type="button"
         id="signupBtn"
         onclick="signup()"
         disabled>
+
         Create Account
+
     </button>
+
+
+    <!-- ========================= -->
+    <!-- LOGIN LINK                -->
+    <!-- ========================= -->
 
     <p>
         Already have an account?
-        <a href="index.html">Login</a>
+        <a href="index.html">
+            Sign in →
+        </a>
     </p>
 
 </div>
 
 <script src="js/validation.js"></script>
 <script src="js/auth.js"></script>
-<script src="js/main.js"></script>
 
 </body>
+
 </html>
+

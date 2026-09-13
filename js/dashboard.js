@@ -1,96 +1,103 @@
-// =========================
-// DASHBOARD INITIALIZATION
-// =========================
+// ======================================================
+// dashboard.js
+// Dashboard initialization and UI setup
+// ======================================================
 
-if (window.location.pathname.includes("dashboard.html")) {
 
-    const loggedIn = localStorage.getItem("loggedIn");
+// ======================================================
+// AUTH GUARD
+// ======================================================
+// Must be the first thing that runs.
+// Redirects to login if no valid session found.
+// ======================================================
 
-    if (loggedIn !== "true") {
-        window.location.href = "index.html";
+const session = requireAuth();
+
+if (session) {
+
+    // ====================================================
+    // WELCOME MESSAGE
+    // ====================================================
+
+    const welcomeEl = document.getElementById("welcome");
+    if (welcomeEl) {
+        welcomeEl.textContent = "Welcome, " + session.name;
     }
 
-    const user = JSON.parse(localStorage.getItem("user"));
 
-    // Welcome text
-    if (user && document.getElementById("welcome")) {
-        document.getElementById("welcome").textContent =
-            "Welcome " + user.name;
-    }
+    // ====================================================
+    // AVATAR INITIALS
+    // ====================================================
 
-    // Avatar initials
-    if (user && document.getElementById("avatar")) {
-
-        const initials = user.name
+    const avatarEl = document.getElementById("avatar");
+    if (avatarEl) {
+        const initials = session.name
             .split(" ")
             .map(word => word[0])
             .join("")
-            .toUpperCase();
-
-        document.getElementById("avatar").textContent =
-            initials;
+            .toUpperCase()
+            .slice(0, 2);
+        avatarEl.textContent = initials;
     }
 
-    loadTasks();
+
+    // ====================================================
+    // STREAK DISPLAY ON LOAD
+    // ====================================================
+
+    const streakData = JSON.parse(
+        localStorage.getItem(session.userId + "_streak") || "{}"
+    );
+    const streakEl = document.getElementById("statStreak");
+    if (streakEl) {
+        streakEl.textContent = (streakData.count || 0) + "d";
+    }
 
 }
 
 
-// =========================
+// ======================================================
 // FOCUS MODE
-// =========================
+// ======================================================
 
 const focusBtn = document.getElementById("focusModeBtn");
 
 if (focusBtn) {
 
-    // Restore previous state
+    // Restore previous focus mode state
     if (sessionStorage.getItem("focusMode") === "true") {
-
         document.body.classList.add("focus-mode");
-
-        focusBtn.textContent =
-            "Exit Focus Mode";
+        focusBtn.textContent = "Exit Focus Mode";
+        focusBtn.setAttribute("aria-pressed", "true");
     }
 
     focusBtn.addEventListener("click", () => {
 
-        document.body.classList.toggle("focus-mode");
-
         const enabled =
-            document.body.classList.contains("focus-mode");
+            document.body.classList.toggle("focus-mode");
 
         focusBtn.textContent =
-            enabled
-                ? "Exit Focus Mode"
-                : "Enter Focus Mode";
+            enabled ? "Exit Focus Mode" : "Enter Focus Mode";
 
-        sessionStorage.setItem(
-            "focusMode",
-            enabled
+        focusBtn.setAttribute(
+            "aria-pressed",
+            String(enabled)
         );
+
+        sessionStorage.setItem("focusMode", String(enabled));
 
     });
 
 }
 
 
-// =========================
+// ======================================================
 // LIVE DATE & TIME
-// =========================
+// ======================================================
 
 function updateDateTime() {
 
     const now = new Date();
-
-    const dateOptions = {
-
-        weekday: "long",
-        year: "numeric",
-        month: "long",
-        day: "numeric"
-
-    };
 
     const currentDate =
         document.getElementById("currentDate");
@@ -99,29 +106,25 @@ function updateDateTime() {
         document.getElementById("currentTime");
 
     if (currentDate) {
-
-        currentDate.textContent =
-            now.toLocaleDateString(
-                undefined,
-                dateOptions
-            );
-
+        currentDate.textContent = now.toLocaleDateString(
+            undefined,
+            {
+                weekday: "long",
+                year:    "numeric",
+                month:   "long",
+                day:     "numeric"
+            }
+        );
     }
 
     if (currentTime) {
-
-        currentTime.textContent =
-            now.toLocaleTimeString([], {
-
-                hour: "2-digit",
-                minute: "2-digit"
-
-            });
-
+        currentTime.textContent = now.toLocaleTimeString([], {
+            hour:   "2-digit",
+            minute: "2-digit"
+        });
     }
 
 }
 
 updateDateTime();
-
 setInterval(updateDateTime, 1000);

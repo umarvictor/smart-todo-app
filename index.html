@@ -9,7 +9,7 @@
         name="viewport"
         content="width=device-width, initial-scale=1.0">
 
-    <title>Login</title>
+    <title>Login — FocusFlow</title>
 
     <link
         rel="stylesheet"
@@ -24,8 +24,12 @@
     <h2>Welcome Back</h2>
 
     <p class="subtitle">
-        Sign in to continue.
+        Sign in to continue your streak.
     </p>
+
+    <!-- ========================= -->
+    <!-- EMAIL                     -->
+    <!-- ========================= -->
 
     <div class="form-group">
 
@@ -37,10 +41,14 @@
             id="loginEmail"
             type="email"
             placeholder="Enter your email"
-            autocomplete="email"
-            required>
+            autocomplete="email">
 
     </div>
+
+
+    <!-- ========================= -->
+    <!-- PASSWORD                  -->
+    <!-- ========================= -->
 
     <div class="form-group">
 
@@ -52,35 +60,86 @@
             id="loginPassword"
             type="password"
             placeholder="Enter your password"
-            autocomplete="current-password"
-            required>
+            autocomplete="current-password">
 
     </div>
 
+
+    <!-- ========================= -->
+    <!-- REMEMBER ME               -->
+    <!-- ========================= -->
+
+    <div class="checkbox-group">
+
+        <input
+            type="checkbox"
+            id="rememberMe">
+
+        <label for="rememberMe">
+            Keep me signed in
+        </label>
+
+    </div>
+
+
+    <!-- ========================= -->
+    <!-- ERROR MESSAGE             -->
+    <!-- ========================= -->
+
+    <small
+        id="loginError"
+        class="error">
+    </small>
+
+
+    <!-- ========================= -->
+    <!-- LOGIN BUTTON              -->
+    <!-- ========================= -->
+
     <button
+        type="button"
         id="loginBtn"
         onclick="login()">
 
-        Login
+        Sign In
 
     </button>
 
+
+    <!-- ========================= -->
+    <!-- FORGOT PASSWORD           -->
+    <!-- ========================= -->
+
     <p>
-
-        No account?
-
-        <a href="signup.html">
-
-            Sign Up
-
+        <a href="forgot.html">
+            Forgot your password?
         </a>
-
     </p>
+
+
+    <!-- ========================= -->
+    <!-- SIGN UP LINK              -->
+    <!-- ========================= -->
+
+    <p>
+        No account?
+        <a href="signup.html">
+            Create one free →
+        </a>
+    </p>
+    <!-- ========================= -->
+<!-- SUCCESS TOAST             -->
+<!-- ========================= -->
+
+<div
+    id="loginToast"
+    class="success-msg"
+    style="display:none;text-align:center;margin-top:12px;">
+</div>
 
 </div>
 
 <script src="js/auth.js"></script>
-<script src="js/main.js"></script>
 
 </body>
 
