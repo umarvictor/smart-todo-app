@@ -1339,3 +1339,69 @@ body.focus-mode .dashboard-grid {
 
 }
 
+
+/* ======================================================
+   DEMO CREDENTIALS BOX
+   ====================================================== */
+
+.demo-box {
+    margin-top: 20px;
+    padding: 14px 16px;
+    background: rgba(59, 130, 246, 0.06);
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    border-radius: 10px;
+    text-align: center;
+}
+
+.demo-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: #60a5fa;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin: 0 0 10px 0;
+}
+
+.demo-cred {
+    font-size: 13px;
+    color: #94a3b8;
+    margin: 4px 0;
+    font-family: monospace;
+    letter-spacing: 0.02em;
+}
+
+.demo-fill-btn {
+    margin-top: 12px;
+    width: 100%;
+    height: 38px;
+    background: rgba(59, 130, 246, 0.15);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    border-radius: 8px;
+    color: #60a5fa;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.demo-fill-btn:hover {
+    background: rgba(59, 130, 246, 0.25);
+    border-color: rgba(59, 130, 246, 0.5);
+    color: #93c5fd;
+}
+
+
+/* ======================================================
+   FIX BROWSER AUTOFILL BACKGROUND
+   ====================================================== */
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 48px #0f172a inset !important;
+    -webkit-text-fill-color: #f1f5f9 !important;
+    caret-color: #f1f5f9;
+    border-color: #334155 !important;
+    transition: background-color 9999s ease-in-out 0s;
+}

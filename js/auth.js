@@ -186,45 +186,39 @@ async function signup() {
     }
 
     // Hash the password
-    // We generate a new random salt for this user,
-    // then run PBKDF2 to produce the hash.
     const salt = generateSalt();
     const hash = await hashPassword(password, salt);
 
     // Build user object — never store the plaintext password
     const newUser = {
-        id:           "u_" + Date.now() + "_" + Math.random().toString(36).substr(2, 6),
-        name:         sanitize(name),
-        email:        email.toLowerCase(),
-        passwordHash: hash,
-        passwordSalt: salt,
-        verified:     false,
+        id:            "u_" + Date.now() + "_" + Math.random().toString(36).substr(2, 6),
+        name:          sanitize(name),
+        email:         email.toLowerCase(),
+        passwordHash:  hash,
+        passwordSalt:  salt,
+        verified:      false,
         agreedToTerms: true,
-        agreedAt:     Date.now(),
-        createdAt:    Date.now()
+        agreedAt:      Date.now(),
+        createdAt:     Date.now()
     };
 
     // Generate a 6-digit verification code
     // Store it in sessionStorage (not localStorage)
-    // so it disappears when the tab closes
     const code = Math.floor(100000 + Math.random() * 900000).toString();
     sessionStorage.setItem("ff_verification", JSON.stringify({
-        email: email.toLowerCase(),
+        email:     email.toLowerCase(),
         code,
-        expiresAt: Date.now() + 10 * 60 * 1000, // 10 minutes
-        attempts: 0
+        expiresAt: Date.now() + 10 * 60 * 1000,
+        attempts:  0
     }));
 
     // Save new user
     users.push(newUser);
     saveUsers(users);
 
-    // Show simulated email preview
-    // In production this would be sent via SMTP
     sessionStorage.setItem("ff_pending_email", email.toLowerCase());
     sessionStorage.setItem("ff_preview_code", code);
 
-    // Redirect to verification page
     window.location.href = "verify.html";
 }
 
@@ -252,7 +246,7 @@ async function login() {
         return;
     }
 
-    // Lockout check — stored in sessionStorage so it resets on tab close
+    // Lockout check
     const lockout = JSON.parse(sessionStorage.getItem("ff_lockout") || "{}");
     if (lockout.until && Date.now() < lockout.until) {
         const secsLeft = Math.ceil((lockout.until - Date.now()) / 1000);
@@ -263,19 +257,17 @@ async function login() {
     const users = getUsers();
     const user  = users.find(u => u.email === email);
 
-    // Re-derive the hash using the stored salt and compare
-    // We always hash even if user not found (prevents timing attacks)
+    // Always hash even if user not found (prevents timing attacks)
     const saltToUse = user ? user.passwordSalt : generateSalt();
     const hash      = await hashPassword(password, saltToUse);
     const match     = user && hash === user.passwordHash;
 
     if (!match) {
-        // Track failed attempts
         const fails = (lockout.fails || 0) + 1;
         if (fails >= 5) {
             sessionStorage.setItem("ff_lockout", JSON.stringify({
                 fails,
-                until: Date.now() + 30 * 1000 // 30 second lockout
+                until: Date.now() + 30 * 1000
             }));
             if (errorEl) errorEl.textContent = "Too many attempts. Please wait 30 seconds.";
         } else {
@@ -285,18 +277,17 @@ async function login() {
         return;
     }
 
-    // Reset lockout on successful login
+    // Reset lockout on success
     sessionStorage.removeItem("ff_lockout");
 
     // Check email verification
     if (!user.verified) {
-        // Re-send simulated code
         const code = Math.floor(100000 + Math.random() * 900000).toString();
         sessionStorage.setItem("ff_verification", JSON.stringify({
-            email: user.email,
+            email:     user.email,
             code,
             expiresAt: Date.now() + 10 * 60 * 1000,
-            attempts: 0
+            attempts:  0
         }));
         sessionStorage.setItem("ff_pending_email", user.email);
         sessionStorage.setItem("ff_preview_code", code);
@@ -306,15 +297,13 @@ async function login() {
 
     // Create session
     const session = {
-        userId:    user.id,
-        name:      user.name,
-        email:     user.email,
-        loginAt:   Date.now(),
+        userId:     user.id,
+        name:       user.name,
+        email:      user.email,
+        loginAt:    Date.now(),
         persistent: remember
     };
 
-    // Persistent sessions go in localStorage (survive tab close)
-    // Non-persistent sessions go in sessionStorage only
     if (remember) {
         localStorage.setItem("ff_session", JSON.stringify(session));
     }
@@ -326,9 +315,6 @@ async function login() {
 
 // ======================================================
 // GET CURRENT SESSION
-// ======================================================
-// Checks sessionStorage first, then localStorage
-// (for persistent "remember me" sessions)
 // ======================================================
 
 function getSession() {
@@ -358,8 +344,6 @@ function logout() {
 // ======================================================
 // REDIRECT IF NOT LOGGED IN
 // ======================================================
-// Call this at the top of any protected page
-// ======================================================
 
 function requireAuth() {
     const session = getSession();
@@ -371,4 +355,51 @@ function requireAuth() {
 }
 
 
+// ======================================================
+// SEED DEMO ACCOUNT
+// ======================================================
+// Creates a default demo account on first visit so
+// reviewers can log in without signing up.
+//
+// Credentials:
+//   Email:    demo@focusflow.app
+//   Password: Demo@1234
+//
+// The account is pre-verified so no email
+// verification step is required.
+// ======================================================
 
+async function seedDemoAccount() {
+
+    const users = getUsers();
+
+    // Only seed if demo account doesn't already exist
+    const exists = users.find(
+        u => u.email === "demo@focusflow.app"
+    );
+
+    if (exists) return;
+
+    const salt = generateSalt();
+    const hash = await hashPassword("Demo@1234", salt);
+
+    const demoUser = {
+        id:            "demo_user",
+        name:          "Demo User",
+        email:         "demo@focusflow.app",
+        passwordHash:  hash,
+        passwordSalt:  salt,
+        verified:      true,
+        agreedToTerms: true,
+        agreedAt:      Date.now(),
+        createdAt:     Date.now()
+    };
+
+    users.push(demoUser);
+    saveUsers(users);
+
+}
+
+// Seed runs on every page load but only
+// creates the account once
+seedDemoAccount();

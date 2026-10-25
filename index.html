@@ -27,6 +27,7 @@
         Sign in to continue your streak.
     </p>
 
+
     <!-- ========================= -->
     <!-- EMAIL                     -->
     <!-- ========================= -->
@@ -41,7 +42,7 @@
             id="loginEmail"
             type="email"
             placeholder="Enter your email"
-            autocomplete="email">
+            autocomplete="off">
 
     </div>
 
@@ -60,7 +61,7 @@
             id="loginPassword"
             type="password"
             placeholder="Enter your password"
-            autocomplete="current-password">
+            autocomplete="off">
 
     </div>
 
@@ -127,19 +128,71 @@
             Create one free →
         </a>
     </p>
-    <!-- ========================= -->
-<!-- SUCCESS TOAST             -->
-<!-- ========================= -->
 
-<div
-    id="loginToast"
-    class="success-msg"
-    style="display:none;text-align:center;margin-top:12px;">
-</div>
+
+    <!-- ========================= -->
+    <!-- SUCCESS TOAST             -->
+    <!-- ========================= -->
+
+    <div
+        id="loginToast"
+        class="success-msg"
+        style="display:none;text-align:center;margin-top:12px;">
+    </div>
+
+
+    <!-- ========================= -->
+    <!-- DEMO CREDENTIALS          -->
+    <!-- ========================= -->
+
+    <div class="demo-box">
+
+        <p class="demo-label">
+            🔍 Demo Account
+        </p>
+
+        <p class="demo-cred">
+            Email: demo@focusflow.app
+        </p>
+
+        <p class="demo-cred">
+            Password: Demo@1234
+        </p>
+
+        <button
+            type="button"
+            class="demo-fill-btn"
+            onclick="fillDemoCredentials()">
+            Click to Auto-fill &amp; Sign In
+        </button>
+
+    </div>
 
 </div>
 
 <script src="js/auth.js"></script>
+<script src="js/main.js"></script>
+
+<script>
+// ======================================================
+// DEMO CREDENTIALS AUTO-FILL
+// ======================================================
+// Fills the login form with demo credentials
+// and submits — one click access for reviewers
+// ======================================================
+
+function fillDemoCredentials() {
+
+    document.getElementById("loginEmail").value =
+        "demo@focusflow.app";
+
+    document.getElementById("loginPassword").value =
+        "Demo@1234";
+
+    login();
+
+}
+</script>
 
 </body>
 
